@@ -1,0 +1,86 @@
+version: "2.1"
+
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    restart: always
+    network_mode: "container:Gluetun_VPN_PIA"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${Master_Path}/ProwlARR/config:/config
+
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    restart: always
+    network_mode: "container:Gluetun_VPN_PIA"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${Master_Path}/Readarr/config:/config
+      - ${Data_Path}:/data      # optional
+      - ${Data_Path}/downloads:/downloads  # optional
+
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    restart: always
+    network_mode: "container:Gluetun_VPN_PIA"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${Data_Path}:/data      # optional
+      - ${Data_Path}/downloads:/downloads  # optional
+      - ${Master_Path}/Sonarr/config:/config
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${Master_Path}/lidarr/config:/config
+      - ${Data_Path}:/data      # optional
+      - ${Data_Path}/downloads:/downloads  # optional
+    network_mode: "container:Gluetun_VPN_PIA"
+    restart: always
+
+
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    restart: always
+    environment:
+      - UMASK_SET=022 # control permissions of files and directories created by Radarr
+      - TZ=${TZ} # Specify a timezone to use EG Europe/London, this is required for Radarr
+      - PUID=${PUID}
+      - PGID=${PGID}
+    volumes:
+      - ${Master_Path}/Radarr/config:/config # Database and Radarr configs
+      - ${Data_Path}:/data      # optional
+      - ${Data_Path}/downloads:/downloads  # optional
+    network_mode: 'container:Gluetun_VPN_PIA'
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    restart: always
+    network_mode: "container:Gluetun_VPN_PIA"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - WEBUI_PORT=8180
+    volumes:
+      - ${Master_Path}/Qbit/config:/config
+      - ${Data_Path}/downloads:/downloads

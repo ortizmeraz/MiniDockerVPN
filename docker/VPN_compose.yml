@@ -1,0 +1,31 @@
+version: "3"
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: Gluetun_VPN_PIA
+    cap_add:
+      - NET_ADMIN
+    restart: always
+    volumes:
+      - ${Master_Path}/gluetun:/gluetun
+    ports:
+      # Qbittorrent
+      - 8180:8180
+      #SonARR
+      - 8989:8989/tcp
+      #RadARR
+      - 7878:7878/tcp 
+      #ReadARR
+      - 8787:8787
+      #ProwLARR
+      - 9696:9696
+      # mylarr
+      - 8090:8090
+      # liddar
+      - 8686:8686
+
+    environment:
+      - VPN_SERVICE_PROVIDER=private internet access
+      - OPENVPN_USER=${PIA_VPN_USER}
+      - OPENVPN_PASSWORD=${PIA_VPN_PASSWORD}
+      - SERVER_REGIONS=Iceland
