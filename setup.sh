@@ -15,6 +15,7 @@ sudo nala install bat -y
 sudo nala install python3-pip -y
 sudo nala install samba -y
 sudo nala install git -y
+sudo nala install tree -y
 
 curl -sS https://starship.rs/install.sh | sh
 
@@ -32,7 +33,6 @@ curl -o ~/.config/starship.toml https://raw.githubusercontent.com/ortizmeraz/Pub
 sudo nala install fonts-firacode
 fc-cache -f -v
 
-
 sudo tee -a /etc/samba/smb.conf << 'EOF'
 
 [Data]
@@ -45,36 +45,20 @@ sudo tee -a /etc/samba/smb.conf << 'EOF'
   directory mask = 0755
 EOF
 
-
 sudo ufw allow samba
 
 sudo smbpasswd -a omar
 sudo systemctl restart smbd nmbd
 
-
-
 curl -fsSL https://get.docker.com | sh
 
 sudo usermod -aG docker $(whoami)
 
-sudo reboot
 sudo nala install docker-compose -y
 
-
-set -euo pipefail
-
-# 1) Change into the MiniDockerVPN folder (adjust path if needed)
-cd ~/MiniDockerVPN
-
-# 2) Enable dotglob so “*” also matches hidden files (like .gitignore)
-shopt -s dotglob
-
-# 3) Move everything from here into your home directory
-mv * ~/
-
-# 4) Disable dotglob again (restore normal globbing)
-shopt -u dotglob
-
+mv MiniDockerVPN/docker/ ~/
+mv MiniDockerVPN/redock.sh ~/
+sudo rm MiniDockerVPN/ -R
 
 grep -Fqx '//192.168.0.16/data ~/data cifs credentials= ~/.config/.smbcredentials,uid=omar,gid=omar,file_mode=0640,dir_mode=0750,_netdev 0 0' /etc/fstab \
   || echo '//192.168.0.16/data ~/data cifs credentials= ~/.config/.smbcredentials,uid=omar,gid=omar,file_mode=0640,dir_mode=0750,_netdev 0 0' | sudo tee -a /etc/fstab
