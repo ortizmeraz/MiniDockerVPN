@@ -60,26 +60,6 @@ mv MiniDockerVPN/docker/ ~/
 mv MiniDockerVPN/redock.sh ~/
 sudo rm MiniDockerVPN/ -R
 
-grep -Fqx '//192.168.0.16/data ~/data cifs credentials= ~/.config/.smbcredentials,uid=omar,gid=omar,file_mode=0640,dir_mode=0750,_netdev 0 0' /etc/fstab \
-  || echo '//192.168.0.16/data ~/data cifs credentials= ~/.config/.smbcredentials,uid=omar,gid=omar,file_mode=0640,dir_mode=0750,_netdev 0 0' | sudo tee -a /etc/fstab
-
-
-# 1) Prompt for the Samba password (input hidden)
-read -sp "Enter Samba password for user omar: " samba_pass
-echo    # newline after hidden input
-
-# 2) Ensure the config directory exists
-mkdir -p ~/.config
-
-# 3) Write the credentials file
-cat <<EOF > ~/.config/.smbcredentials
-username=omar
-password=$samba_pass
-EOF
-
-# 4) Secure it so only you can read/write
-chmod 600 ~/.config/.smbcredentials
-
-echo "✓ Created ~/.config/.smbcredentials"
-
 sudo reboot
+
+# sudo mount -t cifs //192.168.0.16/data /home/omar/data   -o username=omar,uid=omar,gid=omar,file_mode=0640,dir_mode=0750
