@@ -14,5 +14,5 @@ services:
       - ${Data_Path}/downloads:/downloads  # optional
     # network_mode: "container:Gluetun_VPN_PIA"
     ports:
-      - 88686:8686
+      - 8687:8686
     restart: always
