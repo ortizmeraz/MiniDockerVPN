@@ -56,10 +56,10 @@ sudo usermod -aG docker $(whoami)
 
 sudo nala install docker-compose -y
 
-mv MiniDockerVPN/docker/ ~/
-mv MiniDockerVPN/redock.sh ~/
+cp -r MiniDockerVPN/docker/ ~/ 
+cp MiniDockerVPN/redock.sh ~/
 sudo rm MiniDockerVPN/ -R
-
+mkdir data
 sudo reboot
 
 # sudo mount -t cifs //192.168.0.16/data /home/omar/data   -o username=omar,uid=omar,gid=omar,file_mode=0640,dir_mode=0750
