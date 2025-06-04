@@ -5,7 +5,7 @@ docker stop "$(docker ps -aq)"
 sleep 1
 docker rm   "$(docker ps -aq)"
 sleep 1
-
+sudo rm DockerConfs/gluetun/servers.json
 # bring up your stacks
 docker-compose -f docker/portainer-compose.yml up -d --remove-orphans
 sleep 1
