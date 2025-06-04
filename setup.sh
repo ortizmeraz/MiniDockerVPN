@@ -19,9 +19,7 @@ sudo nala install tree -y
 
 curl -sS https://starship.rs/install.sh | sh
 
-mkdir -p ~/.config 
-mkdir -p ~/data
-chmod 0755 ~/data
+mkdir .config 
 
 rm ~/.bashrc
 wget https://raw.githubusercontent.com/ortizmeraz/PublicFiles/refs/heads/main/.bashrc
@@ -60,6 +58,7 @@ cp -r MiniDockerVPN/docker/ ~/
 cp MiniDockerVPN/redock.sh ~/
 sudo rm MiniDockerVPN/ -R
 mkdir data
+chmod 0755 ~/data
 sudo reboot
 
 # sudo mount -t cifs //192.168.0.16/data /home/omar/data   -o username=omar,uid=omar,gid=omar,file_mode=0640,dir_mode=0750

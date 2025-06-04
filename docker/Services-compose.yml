@@ -52,9 +52,10 @@ services:
       - ${Master_Path}/lidarr/config:/config
       - ${Data_Path}:/data      # optional
       - ${Data_Path}/downloads:/downloads  # optional
-    network_mode: "container:Gluetun_VPN_PIA"
+    # network_mode: "container:Gluetun_VPN_PIA"
+    ports:
+      - 8686:8686
     restart: always
-
 
   radarr:
     image: linuxserver/radarr
