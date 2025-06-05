@@ -2,7 +2,7 @@ version: "2.1"
 services:
   podgrab:
     image: akhilrex/podgrab
-    container_name: podgrab
+    container_name: podgrab25
     environment:
       - CHECK_FREQUENCY=240
      # - PASSWORD=password     ## Uncomment to enable basic authentication, username = podgrab
