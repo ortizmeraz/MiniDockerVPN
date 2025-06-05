@@ -8,7 +8,7 @@ services:
      # - PASSWORD=password     ## Uncomment to enable basic authentication, username = podgrab
     volumes:
       - ${Master_Path}/podgrab/config:/config
-      - ${Data_Path}:/assets
+      - ${Data_Path}/podcasts:/assets
     ports:
       - 8082:8080
     restart: always
