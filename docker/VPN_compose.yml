@@ -23,6 +23,8 @@ services:
       - 8090:8090
       # liddar
       - 8686:8686
+      # Headphones
+      - 8181:8181
 
     environment:
       - VPN_SERVICE_PROVIDER=private internet access
