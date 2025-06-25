@@ -41,21 +41,21 @@ services:
       - ${Data_Path}/downloads:/downloads  # optional
       - ${Master_Path}/Sonarr/config:/config
 
-  # lidarr:
-  #   image: lscr.io/linuxserver/lidarr:latest
-  #   container_name: lidarr
-  #   environment:
-  #     - PUID=${PUID}
-  #     - PGID=${PGID}
-  #     - TZ=${TZ}
-  #   volumes:
-  #     - ${Master_Path}/lidarr/config:/config
-  #     - ${Data_Path}:/data      # optional
-  #     - ${Data_Path}/downloads:/downloads  # optional
-  #   # network_mode: "container:Gluetun_VPN_PIA"
-  #   ports:
-  #     - 8686:8686
-  #   restart: always
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${Master_Path}/lidarr/config:/config
+      - ${Data_Path}:/data      # optional
+      - ${Data_Path}/downloads:/downloads  # optional
+    network_mode: "container:Gluetun_VPN_PIA"
+    # ports:
+    #   - 8686:8686
+    restart: always
 
   radarr:
     image: linuxserver/radarr
