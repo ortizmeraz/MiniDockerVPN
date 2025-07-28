@@ -30,4 +30,4 @@ services:
       - VPN_SERVICE_PROVIDER=private internet access
       - OPENVPN_USER=${PIA_VPN_USER}
       - OPENVPN_PASSWORD=${PIA_VPN_PASSWORD}
-      - SERVER_REGIONS=Iceland
+      - SERVER_REGIONS=ca_ontario
